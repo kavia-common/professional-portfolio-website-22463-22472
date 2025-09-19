@@ -1,0 +1,32 @@
+---
+/**
+ * PUBLIC_INTERFACE
+ * Blog section showing latest posts (static placeholders).
+ */
+type Post = { title: string; excerpt: string; date: string; link: string };
+const posts: Post[] = [
+  { title: "Designing for Performance", excerpt: "Practical patterns to ship fast UIs that feel instant.", date: "2025-08-02", link: "#" },
+  { title: "Type-safe APIs with tRPC", excerpt: "Reduce drift and improve DX by generating clients from server contracts.", date: "2025-06-15", link: "#" },
+  { title: "Pragmatic Accessibility", excerpt: "Approaches that keep your product inclusive without slowing teams.", date: "2025-04-09", link: "#" },
+];
+---
+<section id="blog" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Blog</span>
+      <h2 class="section-title">Latest writing</h2>
+      <p class="section-subtitle">Thoughts on product engineering, performance, and developer experience.</p>
+    </div>
+    <div class="grid grid-3">
+      {posts.map((post) => (
+        <article class="card" style="padding:1rem;">
+          <div class="muted" style="font-size:.9rem;">{new Date(post.date).toLocaleDateString()}</div>
+          <h3 style="margin:.25rem 0 .35rem;">{post.title}</h3>
+          <p class="muted">{post.excerpt}</p>
+          <div class="spacer-sm"></div>
+          <a class="btn outline" href={post.link}>Read</a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

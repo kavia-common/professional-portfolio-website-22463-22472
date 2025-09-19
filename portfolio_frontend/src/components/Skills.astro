@@ -1,0 +1,41 @@
+---
+/**
+ * PUBLIC_INTERFACE
+ * Skills section with categorized skill groups.
+ */
+const core = ["TypeScript", "Node.js", "Astro", "React", "CSS", "Accessibility", "Testing"];
+const cloud = ["Docker", "CI/CD", "Cloudflare", "Vercel", "Netlify"];
+const tooling = ["ESLint", "Prettier", "Storybook", "Playwright", "Vitest"];
+---
+<section id="skills" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Skills</span>
+      <h2 class="section-title">What I work with</h2>
+      <p class="section-subtitle">A stack focused on performance, maintainability, and developer experience.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card" style="padding:1rem;">
+        <h3>Core</h3>
+        <div class="spacer-xs"></div>
+        <div class="skills">
+          {core.map((s) => <span class="skill">{s}</span>)}
+        </div>
+      </div>
+      <div class="card" style="padding:1rem;">
+        <h3>Cloud & Infra</h3>
+        <div class="spacer-xs"></div>
+        <div class="skills">
+          {cloud.map((s) => <span class="skill">{s}</span>)}
+        </div>
+      </div>
+      <div class="card" style="padding:1rem;">
+        <h3>Tooling</h3>
+        <div class="spacer-xs"></div>
+        <div class="skills">
+          {tooling.map((s) => <span class="skill">{s}</span>)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

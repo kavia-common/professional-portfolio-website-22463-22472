@@ -1,0 +1,42 @@
+---
+/**
+ * PUBLIC_INTERFACE
+ * A hero banner introducing the person and primary calls to action.
+ */
+const name = "Alex Carter";
+const role = "Full-Stack Engineer";
+const blurb = "I craft performant web apps with delightful user experiences. Specialized in TypeScript, Node.js, and cloud-native architectures.";
+---
+<section class="hero">
+  <div class="container hero-inner">
+    <div>
+      <div class="section-eyebrow">Welcome</div>
+      <h1>Hi, I'm {name} — {role}</h1>
+      <p>{blurb}</p>
+      <div class="actions">
+        <a href="#projects" class="btn">View Projects</a>
+        <a href="#contact" class="btn outline">Get in touch</a>
+      </div>
+    </div>
+    <div class="card hero-card">
+      <div class="section-eyebrow">Highlights</div>
+      <div class="spacer-sm"></div>
+      <div class="kpis">
+        <div class="kpi">
+          <div class="n">7+ yrs</div>
+          <div class="l">Experience</div>
+        </div>
+        <div class="kpi">
+          <div class="n">30+</div>
+          <div class="l">Projects</div>
+        </div>
+        <div class="kpi">
+          <div class="n">5</div>
+          <div class="l">Open Source</div>
+        </div>
+      </div>
+      <div class="spacer-sm"></div>
+      <p class="muted">Focused on building scalable, maintainable systems and accessible UIs.</p>
+    </div>
+  </div>
+</section>

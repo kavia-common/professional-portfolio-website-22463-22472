@@ -1,0 +1,76 @@
+---
+/**
+ * PUBLIC_INTERFACE
+ * Projects section with a responsive grid of project cards.
+ */
+type Project = {
+  title: string;
+  description: string;
+  tags: string[];
+  link?: string;
+};
+const projects: Project[] = [
+  {
+    title: "SaaS Analytics Dashboard",
+    description: "Real-time metrics with data viz, role-based access, and server-side rendering.",
+    tags: ["Astro", "Node.js", "Postgres"],
+    link: "#",
+  },
+  {
+    title: "Design System Kit",
+    description: "Composable component library with tokens, theming, and a11y baked-in.",
+    tags: ["TypeScript", "CSS", "Storybook"],
+    link: "#",
+  },
+  {
+    title: "Headless CMS Blog",
+    description: "MDX content pipeline, static generation, and hybrid rendering.",
+    tags: ["Astro", "MDX", "Cloudflare"],
+    link: "#",
+  },
+  {
+    title: "E-commerce PWA",
+    description: "Offline-first shopping experience with payments and advanced caching.",
+    tags: ["React", "Workbox", "Stripe"],
+    link: "#",
+  },
+  {
+    title: "Realtime Chat",
+    description: "WebSocket powered chat with presence, typing indicators, and moderation.",
+    tags: ["WebSocket", "Redis", "Express"],
+    link: "#",
+  },
+  {
+    title: "Team Kanban",
+    description: "Collaborative task boards with drag-n-drop and audit trails.",
+    tags: ["React DnD", "Prisma", "Auth"],
+    link: "#",
+  },
+];
+---
+<section id="projects" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Projects</span>
+      <h2 class="section-title">Selected work</h2>
+      <p class="section-subtitle">A few projects that highlight product thinking, engineering depth, and attention to detail.</p>
+    </div>
+    <div class="grid grid-3">
+      {projects.map((p) => (
+        <article class="card project">
+          <div class="thumb"></div>
+          <div style="padding:1rem;">
+            <h3>{p.title}</h3>
+            <p>{p.description}</p>
+            <div class="tags">
+              {p.tags.map((t) => <span class="tag">{t}</span>)}
+            </div>
+          </div>
+          <div style="padding:0 1rem 1rem;">
+            <a class="btn outline" href={p.link}>View</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

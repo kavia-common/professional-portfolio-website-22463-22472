@@ -1,54 +1,118 @@
 ---
 import ThemeToggle from '../components/ThemeToggle.astro';
+import "../styles/global.css";
+const { title = "Ocean Professional — Portfolio", description = "A clean, modern portfolio to showcase projects, skills, and writing.", url = "https://example.com" } = Astro.props ?? {};
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<ThemeToggle />
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container nav">
+        <div class="brand">
+          <span class="logo">🌊</span>
+          <span>Ocean Professional</span>
+        </div>
+        <nav class="nav-links">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#blog">Blog</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="nav-cta">
+          <a class="btn outline" href="#contact">Contact</a>
+          <a class="btn secondary" href="#projects">View Work</a>
+        </div>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+          ☰
+        </button>
+      </div>
+    </header>
+
+    <ThemeToggle />
+
+    <slot />
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="muted">© {new Date().getFullYear()} Ocean Professional. All rights reserved.</div>
+        <div class="social">
+          <a href="mailto:hello@example.com" aria-label="Email">✉️ <span class="muted">Email</span></a>
+          <a href="https://github.com/" target="_blank" rel="noreferrer">🐙 <span class="muted">GitHub</span></a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">💼 <span class="muted">LinkedIn</span></a>
+          <a href="https://twitter.com/" target="_blank" rel="noreferrer">🐦 <span class="muted">Twitter/X</span></a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Simple mobile menu scroll-to behavior
+      const btn = document.getElementById('menuBtn');
+      if (btn) {
+        btn.addEventListener('click', () => {
+          const links = [
+            { id: 'about', label: 'About' },
+            { id: 'projects', label: 'Projects' },
+            { id: 'skills', label: 'Skills' },
+            { id: 'blog', label: 'Blog' },
+            { id: 'contact', label: 'Contact' },
+          ];
+          // Build a lightweight sheet
+          let sheet = document.getElementById('mobileSheet');
+          if (!sheet) {
+            sheet = document.createElement('div');
+            sheet.id = 'mobileSheet';
+            sheet.style.position = 'fixed';
+            sheet.style.inset = '0';
+            sheet.style.background = 'rgba(0,0,0,.35)';
+            sheet.style.backdropFilter = 'blur(4px)';
+            sheet.style.zIndex = '60';
+            sheet.innerHTML = `
+              <div style="
+                position:absolute;right:8px;left:8px;top:10px;border:1px solid rgba(17,24,39,.12);
+                background: var(--color-surface);border-radius:14px;box-shadow: var(--shadow);
+                padding:.5rem;">
+                ${links.map(l => `
+                  <a data-id="${l.id}" style="
+                    display:block;padding:.75rem .9rem;border-radius:10px;margin:.15rem 0;
+                    color: var(--color-text-subtle);text-decoration:none;border:1px solid transparent;">
+                    ${l.label}
+                  </a>
+                `).join('')}
+                <div style="display:flex;gap:.5rem;padding:.5rem .25rem .25rem;justify-content:flex-end;">
+                  <button id="closeSheet" class="btn outline">Close</button>
+                </div>
+              </div>`;
+            document.body.appendChild(sheet);
+            sheet.addEventListener('click', (e) => {
+              if (e.target === sheet) sheet.remove();
+            });
+            sheet.querySelector('#closeSheet')?.addEventListener('click', () => sheet.remove());
+            sheet.querySelectorAll('a[data-id]').forEach(a => {
+              a.addEventListener('click', () => {
+                const id = a.getAttribute('data-id');
+                if (id) {
+                  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  setTimeout(() => sheet.remove(), 200);
+                }
+              });
+            });
+          }
+        });
+      }
+    </script>
+  </body>
 </html>
-
-<style>
-	:root {
-		/* Light theme variables */
-		--bg-color: #ffffff;
-		--text-color: #111827;
-		--text-secondary: #4b5563;
-		--border-color: rgba(0, 0, 0, 0.1);
-		--card-bg: rgba(255, 255, 255, 1);
-		--card-hover-bg: rgba(255, 255, 255, 0.55);
-		--shadow-color: rgba(0, 0, 0, 0.1);
-		--shadow-hover-color: rgba(0, 0, 0, 0.15);
-	}
-
-	body.dark-theme {
-		/* Dark theme variables */
-		--bg-color: #111827;
-		--text-color: #f9fafb;
-		--text-secondary: #d1d5db;
-		--border-color: rgba(255, 255, 255, 0.2);
-		--card-bg: rgba(31, 41, 55, 0.9);
-		--card-hover-bg: rgba(31, 41, 55, 0.7);
-		--shadow-color: rgba(0, 0, 0, 0.3);
-		--shadow-hover-color: rgba(0, 0, 0, 0.4);
-	}
-
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-		background-color: var(--bg-color);
-		color: var(--text-color);
-		transition: background-color 0.3s ease, color 0.3s ease;
-	}
-</style>
